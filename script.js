@@ -35,20 +35,30 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
+    // Date today for newspaper edition formatting
+    const editionDateSpan = document.getElementById('edition-date');
+    if (editionDateSpan) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        editionDateSpan.textContent = new Date().toLocaleDateString('en-US', options);
+    }
+
     // Smooth Scroll for Navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId && targetId !== '#') {
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetArea = document.querySelector(targetId);
+                if (targetArea) {
+                    targetArea.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
 
-    // Intersection Observer for simple scroll animations
+    // Intersection Observer for snappy structural appearing animations
     const observerOptions = {
         threshold: 0.1
     };
@@ -56,54 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.project-card, .timeline-item, .skill-item').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    document.querySelectorAll('.animate-snap').forEach(el => {
         observer.observe(el);
     });
-
-    // Theme Toggle Logic
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const htmlElement = document.documentElement;
-
-    // Check for saved user preference, if any, on load of the website
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme) {
-        htmlElement.setAttribute('data-theme', currentTheme);
-
-        if (currentTheme === 'light') {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-        }
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            let theme = 'light';
-
-            if (htmlElement.getAttribute('data-theme') === 'light') {
-                htmlElement.setAttribute('data-theme', 'dark');
-                theme = 'dark';
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                htmlElement.setAttribute('data-theme', 'light');
-                theme = 'light';
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-
-            localStorage.setItem('theme', theme);
-        });
-    }
 });

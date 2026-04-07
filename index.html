@@ -4,207 +4,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Developer & Open Source Contributor</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Roboto:wght@300;400;500&display=swap"
-        rel="stylesheet">
+    <title>Portfolio | The Developer Edition</title>
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
+<body class="newsprint-texture font-body text-black bg-white">
 
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-logo">Portfolio</div>
-        <div class="theme-toggle">
-            <i id="theme-icon" class="fas fa-sun"></i>
+    <nav class="navbar px-0">
+        <div class="nav-logo border-r flex flex-col items-start justify-center p-4 lg:p-6" style="width: auto; min-width: 250px;">
+            <h1 class="text-2xl lg:text-3xl font-serif uppercase tracking-tighter leading-none m-0 p-0 text-black">The Portfolio</h1>
         </div>
         <div class="hamburger">
-            <i class="fas fa-bars"></i>
+            <i class="fa-solid fa-bars"></i>
         </div>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
+            <a href="#projects">Work</a>
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
+    <!-- Header spacing compensation -->
+    <div class="pt-32"></div>
+
     <!-- Hero Section -->
-    <section class="hero fade-in">
-        <h1 class="delay-100">Om S Habib</h1>
-        <h2 class="delay-200">Software Developer & Open Source Enthusiast</h2>
-        <p class="delay-300">Interested Space Tech, Astronomy, Blockchain Tech and Artifical Intelligence and Machine
-            Learning.
-            Passionate about Open Source and
-            solving complex problems.</p>
-        <div class="hero-buttons delay-300">
-            <a href="#projects" class="btn btn-primary">Work Section</a>
-            <a href="#contact" class="btn btn-outline">Contact Info</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Hello! I am a motivated Software Developer based in Bengaluru, India.</p>
-                <p>My interest lies at the intersection of technology and science. I have been actively contributing to
-                    open-source organizations, working on high-performance code and scientific code. I also
-                    enjoy building web and mobile applications that tackle real-world problems, from carbon tracking to
-                    sports tech.</p>
-                <p>I am constantly learning and exploring new domains, including Linux systems, and game
-                    development.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section (Placeholder based on Resume) -->
-    <section id="experience">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            <!-- Item 1: Open Source (Inferred) -->
-            <div class="timeline-item">
-                <span class="timeline-date">Current</span>
-                <div class="timeline-content">
-                    <h3>Open Source Contributor</h3>
-                    <p>Explored top Open Source organizations, researching contributor activity and identifying Python,
-                        MERN and JS based
-                        projects. Analyzed repositories and issues to contribute effectively to scientific software.</p>
+    <section class="container mb-16 border-t border-b border-r border-l border-black" id="about">
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+            <!-- Main Hero Col (8) -->
+            <div class="col-span-12 lg:col-span-8 p-8 lg:grid-border-r border-b lg:border-b-0 animate-snap">
+                <h1 class="text-6xl lg:text-9xl uppercase leading-none tracking-tight font-black mb-8 text-black">Om S Habib</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-black">
+                    <div>
+                        <h2 class="text-xl lg:text-2xl font-serif font-bold uppercase border-b border-black pb-2 mb-4">The Developer</h2>
+                        <p class="text-lg text-justify text-neutral-600 font-body">
+                            <span class="drop-cap">S</span>oftware Developer & Open Source Enthusiast based in Bengaluru. Currently focused on Space Tech, Statistical Machine Learning, and Artificial Intelligence.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-lg text-justify md:mt-14 text-neutral-600 font-body">
+                            Passionate about Open Source. Recently engaged with GSoC 2026 implementing high-performance Spectral Timing algorithms in Julia, and building predictive analytics pipelines.
+                        </p>
+                        <div class="mt-8 flex gap-4">
+                            <a href="#projects" class="btn btn-primary sharp-corners">Read the Work</a>
+                            <a href="#contact" class="btn btn-outline sharp-corners">Contact</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Item 2: Projects/Freelance (Inferred) -->
-            <div class="timeline-item">
-                <span class="timeline-date">2023 - Present</span>
-                <div class="timeline-content">
-                    <h3>Software Development</h3>
-                    <h4>Self & Collaborative</h4>
-                    <p>Designed and developed various applications including 'CalCarbo' for emission tracking and
-                        'Khel-Connect' for athletes. Utilized modern stacks like React, TypeScript, and Python.</p>
+            <!-- Sidebar Hero Col (4) -->
+            <div class="col-span-12 lg:col-span-4 flex flex-col animate-snap">
+                <div class="p-8 border-b border-black flex-1 w-full bg-white">
+                    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4">Latest Briefing</p>
+                    <h3 class="font-serif text-3xl font-bold mb-4 leading-tight">Advancing Open Source & Analytics</h3>
+                    <p class="text-sm text-neutral-600 text-justify font-body">
+                        Active contributions include writing Julia packages for the Spectral Timing project, deploying Streamlit environments (Bionium X), and establishing End-to-End ML pipelines for Demand Prediction.
+                    </p>
+                </div>
+                <!-- Placeholder Image with Radial format -->
+                <div class="p-8 radial-bg flex-1 min-h-[220px] flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 relative">
+                    <span class="font-mono z-10 text-xs uppercase tracking-widest text-neutral-500 bg-white p-2 border border-black absolute bottom-4 right-4">Fig 1.1: Developer Profile</span>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Item 3: Unity (Inferred from bio) -->
+    <!-- Experience Section (Inverted) -->
+    <section id="experience" class="inverted-section py-16 border-y border-white">
+        <div class="container animate-snap">
+            <div class="grid grid-cols-1 lg:grid-cols-12 border border-white">
+                <div class="col-span-12 lg:col-span-4 p-8 lg:border-r border-b lg:border-b-0 border-white bg-black">
+                    <p class="font-mono text-xs uppercase tracking-widest text-red mb-2"> Professional Background </p>
+                    <h2 class="text-5xl lg:text-7xl font-black uppercase tracking-tight mb-8"> Experience <br> & Roles </h2>
+                    <p class="text-sm text-justify text-neutral-400">
+                        A chronology of software exploration, open source collaboration, and building high-performance solutions across various stacks.
+                    </p>
+                </div>
+                
+                <div class="col-span-12 lg:col-span-8 bg-black">
+                    <!-- Item 1 -->
+                    <div class="p-8 border-b border-neutral-700 hover:bg-neutral-900 transition-colors duration-200">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h3 class="text-2xl lg:text-3xl font-serif font-bold text-white mb-2 md:mb-0">Algorithmic Engineering</h3>
+                            <span class="font-mono text-red text-xs lg:text-sm uppercase tracking-widest border border-red px-2 py-1">2026 - Present</span>
+                        </div>
+                        <p class="text-neutral-400 text-justify mb-4">
+                            Drafting proposals and algorithms for GSoC 2026, working tightly on Spectral Timing tools within the Julia ecosystem. Extensively applying statistical analysis (ANOVA, Distribution Fitting) to real-world datasets alongside advanced pipeline automation.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag text-white">Julia</span>
+                            <span class="tech-tag text-white">Machine Learning</span>
+                            <span class="tech-tag text-white">Data Science</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="p-8 hover:bg-neutral-900 transition-colors duration-200">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <div>
+                                <h3 class="text-2xl lg:text-3xl font-serif font-bold text-white mb-1">Full-Stack & Systems</h3>
+                                <p class="font-mono text-xs text-neutral-400 uppercase tracking-widest mb-0">Web & Cloud Architecture</p>
+                            </div>
+                            <span class="font-mono text-red text-xs lg:text-sm uppercase tracking-widest border border-red px-2 py-1 mt-2 md:mt-0 relative md:-top-2">2023 - 2025</span>
+                        </div>
+                        <p class="text-neutral-400 text-justify mb-4">
+                            Pioneered multi-faceted platforms. Deployed persistent Streamlit applications (Bionium X) powered by GitHub Actions. Engineered 'CalCarbo' for emission tracking and 'Khel-Connect' using TypeScript and scalable backend architectures.
+                        </p>
+                        <div class="flex flex-wrap gap-2 wrap">
+                            <span class="tech-tag text-white">React / Next.js</span>
+                            <span class="tech-tag text-white">TypeScript</span>
+                            <span class="tech-tag text-white">Streamlit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Skills Ticker -->
+    <section id="skills" class="py-16 pb-0">
+        <h2 class="text-center text-4xl font-black uppercase mb-8">Technical Competencies</h2>
+        <div class="ticker-wrap border-y mt-8">
+            <div class="ticker">
+                <!-- Repeated blocks to ensure smooth continuous scrolling -->
+                <div class="ticker-item"> C++ / C# <span class="ticker-item-separator">✦</span> Python <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> MySQL <span class="ticker-item-separator">✦</span> Next.js <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Tailwind <span class="ticker-item-separator">✦</span> Express <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Linux <span class="ticker-item-separator">✦</span> AWS </div>
+                <div class="ticker-item"> C++ / C# <span class="ticker-item-separator">✦</span> Python <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> MySQL <span class="ticker-item-separator">✦</span> Next.js <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Tailwind <span class="ticker-item-separator">✦</span> Express <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Linux <span class="ticker-item-separator">✦</span> AWS </div>
+                <div class="ticker-item"> C++ / C# <span class="ticker-item-separator">✦</span> Python <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> MySQL <span class="ticker-item-separator">✦</span> Next.js <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Tailwind <span class="ticker-item-separator">✦</span> Express <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Linux <span class="ticker-item-separator">✦</span> AWS </div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-
-            <!-- CalCarbo -->
-            <div class="project-card">
-                <h3>CalCarbo</h3>
-                <p>An eco-friendly Carbon footprint and emission tracker designed to help users monitor and reduce their
-                    environmental impact.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Web Dev</span>
-                    <span class="tech-tag">Eco-Tech</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Omiii-215/CalCarbo" target="_blank"><i class="fab fa-github"></i> View
-                        Code</a>
-                </div>
+    <section id="projects" class="py-16">
+        <div class="container animate-snap">
+            <div class="flex justify-between items-end mb-8 border-b-4 border-black pb-4">
+                <h2 class="text-5xl font-black uppercase tracking-tighter m-0">Featured Work</h2>
+                <span class="font-mono text-xs uppercase tracking-widest text-neutral-600 hidden md:inline-block relative bottom-1">Curated Selections</span>
             </div>
-
-            <!-- Khel-Connect -->
-            <div class="project-card">
-                <h3>Khel-Connect</h3>
-                <p>A mobile application designed for athletes to connect, track performance, and find opportunities.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">Mobile</span>
-                    <span class="tech-tag">Sports Tech</span>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 border border-black">
+                <!-- Bike Sharing ML -->
+                <div class="col-span-12 lg:col-span-6 p-8 lg:grid-border-r border-b border-black hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                    <div>
+                        <div class="flex justify-between items-center mb-6 gap-2">
+                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Bike Analytics</h3>
+                            <a href="#" target="_blank" class="icon-box shrink-0" aria-label="View Bike Sharing Code">
+                                <i class="fa-brands fa-github text-xl"></i>
+                            </a>
+                        </div>
+                        <p class="text-lg text-justify text-neutral-600 mb-6 font-body">
+                            <span class="drop-cap">E</span>ngineered machine learning pipelines utilizing Random Forest, Logistic Regression, and Isolation Forest models. Analyzes bike-sharing demand with thorough statistical distribution testing.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag text-black">Python</span>
+                            <span class="tech-tag text-black">Data Science</span>
+                        </div>
+                        <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.1</span>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/Omiii-215/Khel-Connect" target="_blank"><i
-                            class="fab fa-github"></i> View Code</a>
-                </div>
-            </div>
 
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-wrapper">
-            <!-- Languages & Databases -->
-            <div class="skill-category">
-                <h3>Languages & Databases</h3>
-                <div class="skills-container">
-                    <div class="skill-item">C++ / C#</div>
-                    <div class="skill-item">Python</div>
-                    <div class="skill-item">JavaScript</div>
-                    <div class="skill-item">TypeScript</div>
-                    <div class="skill-item">MongoDB</div>
-                    <div class="skill-item">MySQL</div>
+                <!-- Bionium X -->
+                <div class="col-span-12 lg:col-span-6 p-8 border-b border-black hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                    <div>
+                        <div class="flex justify-between items-center mb-6 gap-2">
+                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Bionium X</h3>
+                            <a href="https://bionium-x.streamlit.app/" target="_blank" class="icon-box shrink-0" aria-label="View Bionium X Live">
+                                <i class="fa-solid fa-external-link-alt text-xl"></i>
+                            </a>
+                        </div>
+                        <p class="text-lg text-justify text-neutral-600 mb-6 font-body">
+                            <span class="drop-cap">A</span> highly resilient Streamlit environment deployed in production. Built with automated GitHub Actions keep-alive workflows to ensure zero-downtime availability for its data interfaces.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag text-black">Streamlit</span>
+                            <span class="tech-tag text-black">DevOps</span>
+                        </div>
+                        <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.2</span>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Frameworks & Libraries -->
-            <div class="skill-category">
-                <h3>Frameworks & Libraries</h3>
-                <div class="skills-container">
-                    <div class="skill-item">Express.js</div>
-                    <div class="skill-item">Flask</div>
-                    <div class="skill-item">FastAPI</div>
-                    <div class="skill-item">Next.js</div>
-                    <div class="skill-item">React</div>
-                    <div class="skill-item">Tailwind</div>
+                <!-- CalCarbo -->
+                <div class="col-span-12 lg:col-span-6 p-8 lg:grid-border-r border-b lg:border-b-0 border-black hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                    <div>
+                        <div class="flex justify-between items-center mb-6 gap-2">
+                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">CalCarbo</h3>
+                            <a href="https://github.com/Omiii-215/CalCarbo" target="_blank" class="icon-box shrink-0" aria-label="View CalCarbo Code">
+                                <i class="fa-brands fa-github text-xl"></i>
+                            </a>
+                        </div>
+                        <p class="text-lg text-justify text-neutral-600 mb-6 font-body">
+                            An eco-friendly Carbon footprint and emission tracker designed to help users monitor and reduce their environmental impact utilizing meticulous environmental analytics and reporting.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag text-black">JavaScript</span>
+                            <span class="tech-tag text-black">Eco-Tech</span>
+                        </div>
+                        <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.3</span>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Platforms & Tools -->
-            <div class="skill-category">
-                <h3>Platforms & Tools</h3>
-                <div class="skills-container">
-                    <div class="skill-item">AWS</div>
-                    <div class="skill-item">DigitalOcean</div>
-                    <div class="skill-item">Docker</div>
-                    <div class="skill-item">Linux</div>
-                    <div class="skill-item">Supabase</div>
-                    <div class="skill-item">Github</div>
-                    <div class="skill-item">Postman</div>
+                
+                <!-- Khel-Connect -->
+                <div class="col-span-12 lg:col-span-6 p-8 hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                    <div>
+                        <div class="flex justify-between items-center mb-6 gap-2">
+                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Khel-Connect</h3>
+                            <a href="https://github.com/Omiii-215/Khel-Connect" target="_blank" class="icon-box shrink-0" aria-label="View Khel-Connect Code">
+                                <i class="fa-brands fa-github text-xl"></i>
+                            </a>
+                        </div>
+                        <p class="text-lg text-justify text-neutral-600 mb-8 font-body mt-4">
+                            A robust mobile application engineered for athletes to connect natively, analyze immediate performance metrics, and surface critical sporting opportunities in real time.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-tag text-black">TypeScript</span>
+                            <span class="tech-tag text-black">Sports Tech</span>
+                        </div>
+                        <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.4</span>
+                    </div>
                 </div>
-            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-container">
-            <p class="contact-text">Currently open to internships and collaboration opportunities. Feel free to
-                reach out via email or connect on social media.</p>
+    <section id="contact" class="py-16">
+        <div class="container animate-snap">
+            <div class="grid grid-cols-1 lg:grid-cols-12 border-4 border-black bg-white">
+                <!-- Left: Big Title -->
+                <div class="col-span-12 lg:col-span-7 p-8 lg:p-16 lg:border-r border-b lg:border-b-0 border-black flex flex-col justify-between">
+                    <div>
+                        <div class="font-serif text-2xl text-neutral-400 tracking-[1em] mb-8">
+                            &#x2727; &#x2727; &#x2727;
+                        </div>
+                        <h2 class="text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-8 text-black">Open <br> For <br> Inquiry</h2>
+                        <p class="text-xl max-w-lg text-neutral-600 font-body drop-cap">
+                            T
+                        </p>
+                        <p class="text-xl max-w-lg text-neutral-600 font-body mt-2">
+                           he desk is currently open to new collaborations, open source contributions, internships, and deep technical challenges.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Right: Information & Links -->
+                <div class="col-span-12 lg:col-span-5 p-8 lg:p-16 flex flex-col justify-center bg-neutral-100">
+                    <div class="w-full">
+                        <h3 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-black pb-2">Direct Correspondence</h3>
+                        
+                        <div class="mb-12">
+                            <h4 class="font-serif text-3xl font-bold mb-4">Electronic Mail</h4>
+                            <a href="mailto:Omhabib311@gmail.com" class="border-2 border-black p-6 hard-shadow-hover bg-white flex justify-between items-center transition-colors">
+                                <span class="font-mono text-black uppercase tracking-widest font-bold">Omhabib311@gmail.com</span>
+                                <i class="fa-solid fa-arrow-right text-2xl"></i>
+                            </a>
+                        </div>
+                        
+                        <h3 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4 border-b border-black pb-2">Digital Profiles</h3>
+                        
+                        <div class="flex gap-4 mb-12 w-full">
+                            <a href="https://github.com/Omiii-215" target="_blank" class="icon-box hard-shadow-hover bg-white flex flex-col" style="flex: 1; height: 120px; width: auto;" aria-label="GitHub">
+                                <i class="fa-brands fa-github text-4xl mb-2"></i>
+                                <span class="font-mono text-xs uppercase tracking-widest">GitHub</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/om-s-habib-609a81381/" target="_blank" class="icon-box hard-shadow-hover bg-white flex flex-col" style="flex: 1; height: 120px; width: auto;" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin text-4xl mb-2"></i>
+                                <span class="font-mono text-xs uppercase tracking-widest">LinkedIn</span>
+                            </a>
+                        </div>
 
-            <div class="social-links">
-                <a href="mailto:Omhabib311@gmail.com" class="social-icon" title="Email"><i
-                        class="fas fa-envelope"></i></a>
-                <a href="https://github.com/Omiii-215" target="_blank" class="social-icon" title="GitHub"><i
-                        class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/om-s-habib-609a81381/" target="_blank" class="social-icon"
-                    title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:Omhabib311@gmail.com" class="btn btn-primary text-xl w-full py-4 uppercase tracking-widest text-center" style="display: block;">Draft Message</a>
+                    </div>
+                </div>
             </div>
-
-            <a href="mailto:Omhabib311@gmail.com" class="btn btn-primary">Contact</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; <span id="current-year"></span> Designed & Built with Code.</p>
+    <footer class="border-t border-black py-8 bg-white mt-16">
+        <div class="container flex flex-col md:flex-row justify-between items-center">
+            <p class="font-mono text-xs uppercase tracking-widest text-neutral-600 mb-0">
+                &copy; <span id="current-year"></span> | Typeset & Developed via Code.
+            </p>
+            <p class="font-mono text-xs uppercase tracking-widest text-neutral-600 mt-4 md:mt-0 mb-0">
+                Edition: Vol 1.0 | Printed Locally
+            </p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
