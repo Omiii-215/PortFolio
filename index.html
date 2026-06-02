@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="newsprint-texture font-body text-black bg-white">
+<body class="newsprint-texture font-body text-black bg-white relative">
+    <canvas id="starfield" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
 
     <!-- Navigation -->
     <nav class="navbar px-0">
@@ -26,7 +27,11 @@
             <a href="#experience">Experience</a>
             <a href="#projects">Work</a>
             <a href="#skills">Skills</a>
+            <a href="#achievements">Achievements</a>
             <a href="#contact">Contact</a>
+            <button id="themeToggle" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon text-xl"></i>
+            </button>
         </div>
     </nav>
 
@@ -37,19 +42,19 @@
     <section class="container mb-16 border-t border-b border-r border-l border-black" id="about">
         <div class="grid grid-cols-1 lg:grid-cols-12">
             <!-- Main Hero Col (8) -->
-            <div class="col-span-12 lg:col-span-8 p-8 lg:grid-border-r border-b lg:border-b-0 animate-snap">
+            <div class="col-span-12 lg:col-span-8 p-8 lg:grid-border-r border-b lg:border-b-0 animate-snap flex flex-col">
                 <h1 class="text-6xl lg:text-9xl uppercase leading-none tracking-tight font-black mb-8 text-black">Om S Habib</h1>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-black">
                     <div>
-                        <h2 class="text-xl lg:text-2xl font-serif font-bold uppercase border-b border-black pb-2 mb-4">The Developer</h2>
+                        <h2 class="text-xl lg:text-2xl font-serif font-bold uppercase border-b border-border pb-2 mb-4"><i class="fa-solid fa-user-astronaut text-red mr-2"></i>The Developer</h2>
                         <p class="text-lg text-justify text-neutral-600 font-body">
-                            <span class="drop-cap">S</span>oftware Developer & Open Source Enthusiast based in Bengaluru. Currently focused on Space Tech, Statistical Machine Learning, and Artificial Intelligence.
+                            <span class="drop-cap">S</span>oftware Developer & Open Source Enthusiast based in Bengaluru. Pursuing a B.Tech in CSE (AI & ML) at Medhavi Skills University. Currently focused on Space Tech and Statistical Machine Learning.
                         </p>
                     </div>
                     <div>
                         <p class="text-lg text-justify md:mt-14 text-neutral-600 font-body">
-                            Passionate about Open Source. Recently engaged with GSoC 2026 implementing high-performance Spectral Timing algorithms in Julia, and building predictive analytics pipelines.
+                            Passionate about Open Source. Currently engaged with GSoC 2026 implementing high-performance Spectral Timing algorithms in Julia (Stingray.jl), and building predictive analytics pipelines.
                         </p>
                         <div class="mt-8 flex gap-4">
                             <a href="#projects" class="btn btn-primary sharp-corners">Read the Work</a>
@@ -57,32 +62,54 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Mini Game Container -->
+                <div id="gameContainer" class="mt-8 border border-border group cursor-pointer hidden md:block" style="flex: 1 1 0%; min-height: 250px; position: relative; overflow: hidden; background-color: #000;">
+                    <div id="gameStartScreen" class="absolute inset-0 z-20 flex flex-col items-center justify-center transition-opacity" style="background-color: rgba(0,0,0,0.8);">
+                        <i class="fa-solid fa-rocket text-3xl mb-2" style="color: var(--accent)"></i>
+                        <h4 class="font-mono text-sm uppercase tracking-widest text-white mb-2">Cosmic Dodge</h4>
+                        <p class="font-mono text-xs text-neutral-400">Click to Start</p>
+                    </div>
+                    <div id="gameOverScreen" class="absolute inset-0 z-30 flex flex-col items-center justify-center" style="background-color: rgba(0,0,0,0.9); display: none;">
+                        <h4 class="font-mono text-lg uppercase tracking-widest text-red mb-2">System Failure</h4>
+                        <p class="font-mono text-xs text-neutral-400 mb-4">Score: <span id="finalScore" style="color: #fff;">0</span></p>
+                        <p class="font-mono text-xs text-neutral-500">Click to Reboot</p>
+                    </div>
+                    <div class="absolute top-2 z-10 font-mono text-xs text-neutral-500" style="right: 1rem;">Score: <span id="gameScore" style="color: #fff;">0</span></div>
+                    
+                    <!-- Player Rocket -->
+                    <div id="playerShip" class="absolute text-2xl z-10" style="color: var(--accent); transform: translate(-50%, -50%); top: 50%; left: 10%;">
+                        <i class="fa-solid fa-rocket rotate-90"></i>
+                    </div>
+                </div>
             </div>
 
             <!-- Sidebar Hero Col (4) -->
             <div class="col-span-12 lg:col-span-4 flex flex-col animate-snap">
                 <div class="p-8 border-b border-black flex-1 w-full bg-white">
-                    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4">Latest Briefing</p>
+                    <p class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4"><i class="fa-solid fa-satellite-dish text-red mr-2"></i>Mission Log</p>
                     <h3 class="font-serif text-3xl font-bold mb-4 leading-tight">Advancing Open Source & Analytics</h3>
                     <p class="text-sm text-neutral-600 text-justify font-body">
                         Active contributions include writing Julia packages for the Spectral Timing project, deploying Streamlit environments (Bionium X), and establishing End-to-End ML pipelines for Demand Prediction.
                     </p>
                 </div>
-                <!-- Placeholder Image with Radial format -->
-                <div class="p-8 radial-bg flex-1 min-h-[220px] flex items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 relative">
-                    <span class="font-mono z-10 text-xs uppercase tracking-widest text-neutral-500 bg-white p-2 border border-black absolute bottom-4 right-4">Fig 1.1: Developer Profile</span>
+                <div class="flex flex-col border-b border-border lg:border-b-0 theme-aware-image w-full">
+                    <img src="assets/profile.jpeg" alt="Om S Habib" class="w-full aspect-square object-cover">
+                    <div class="font-mono text-sm uppercase tracking-widest p-4 text-center profile-caption">
+                        <i class="fa-solid fa-rocket mr-2" style="color: var(--accent);"></i>Fig 1.1: Developer Profile
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section (Inverted) -->
-    <section id="experience" class="inverted-section py-16 border-y border-white">
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 border-y border-border">
         <div class="container animate-snap">
-            <div class="grid grid-cols-1 lg:grid-cols-12 border border-white">
-                <div class="col-span-12 lg:col-span-4 p-8 lg:border-r border-b lg:border-b-0 border-white bg-black">
-                    <p class="font-mono text-xs uppercase tracking-widest text-red mb-2"> Professional Background </p>
-                    <h2 class="text-5xl lg:text-7xl font-black uppercase tracking-tight mb-8"> Experience <br> & Roles </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-12 border border-border">
+                <div class="col-span-12 lg:col-span-4 p-8 lg:border-r border-b lg:border-b-0 border-border bg-black">
+                    <p class="font-mono text-xs uppercase tracking-widest text-red mb-2"><i class="fa-solid fa-satellite mr-2"></i> Professional Background </p>
+                    <h2 class="text-5xl lg:text-7xl font-black uppercase tracking-tight mb-8"> Career <br> Trajectory </h2>
                     <p class="text-sm text-justify text-neutral-400">
                         A chronology of software exploration, open source collaboration, and building high-performance solutions across various stacks.
                     </p>
@@ -90,39 +117,45 @@
                 
                 <div class="col-span-12 lg:col-span-8 bg-black">
                     <!-- Item 1 -->
-                    <div class="p-8 border-b border-neutral-700 hover:bg-neutral-900 transition-colors duration-200">
+                    <div class="p-8 border-b border-border hover:bg-neutral-100 transition-colors duration-200">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                            <h3 class="text-2xl lg:text-3xl font-serif font-bold text-white mb-2 md:mb-0">Algorithmic Engineering</h3>
-                            <span class="font-mono text-red text-xs lg:text-sm uppercase tracking-widest border border-red px-2 py-1">2026 - Present</span>
+                            <div>
+                                <h3 class="text-2xl lg:text-3xl font-serif font-bold text-white mb-1">Google Summer of Code (GSoC)</h3>
+                                <p class="font-mono text-xs text-neutral-400 uppercase tracking-widest mb-0">Student Developer (Stingray.jl)</p>
+                            </div>
+                            <span class="font-mono text-red text-xs lg:text-sm uppercase tracking-widest border border-red px-2 py-1 mt-2 md:mt-0 relative md:-top-2">May 2026 - Present</span>
                         </div>
-                        <p class="text-neutral-400 text-justify mb-4">
-                            Drafting proposals and algorithms for GSoC 2026, working tightly on Spectral Timing tools within the Julia ecosystem. Extensively applying statistical analysis (ANOVA, Distribution Fitting) to real-world datasets alongside advanced pipeline automation.
-                        </p>
+                        <ul class="text-neutral-400 text-justify mb-4 list-disc pl-5 font-body">
+                            <li class="mb-2">Spearheaded the "Spectral Timing in Julia" project by engineering a high-performance library and architecting comprehensive data structures (e.g., Powerspectrum) to analyze multi-megabyte FITS event files.</li>
+                            <li class="mb-2">Implemented cross-spectral pipelines and the Lomb-Scargle periodogram, enabling robust analysis of X-ray reverberation and quasi-periodic oscillations (QPOs).</li>
+                            <li>Refactored the codebase into granular, type-safe modules with cache-friendly Fourier operations for strict numerical parity.</li>
+                        </ul>
                         <div class="flex flex-wrap gap-2">
                             <span class="tech-tag text-white">Julia</span>
-                            <span class="tech-tag text-white">Machine Learning</span>
+                            <span class="tech-tag text-white">Astrophysics</span>
                             <span class="tech-tag text-white">Data Science</span>
                         </div>
                     </div>
                     
-                    <!-- Item 2 -->
-                    <div class="p-8 hover:bg-neutral-900 transition-colors duration-200">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                            <div>
-                                <h3 class="text-2xl lg:text-3xl font-serif font-bold text-white mb-1">Full-Stack & Systems</h3>
-                                <p class="font-mono text-xs text-neutral-400 uppercase tracking-widest mb-0">Web & Cloud Architecture</p>
-                            </div>
-                            <span class="font-mono text-red text-xs lg:text-sm uppercase tracking-widest border border-red px-2 py-1 mt-2 md:mt-0 relative md:-top-2">2023 - 2025</span>
-                        </div>
-                        <p class="text-neutral-400 text-justify mb-4">
-                            Pioneered multi-faceted platforms. Deployed persistent Streamlit applications (Bionium X) powered by GitHub Actions. Engineered 'CalCarbo' for emission tracking and 'Khel-Connect' using TypeScript and scalable backend architectures.
-                        </p>
-                        <div class="flex flex-wrap gap-2 wrap">
-                            <span class="tech-tag text-white">React / Next.js</span>
-                            <span class="tech-tag text-white">TypeScript</span>
-                            <span class="tech-tag text-white">Streamlit</span>
-                        </div>
-                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Source Section -->
+    <section id="opensource" class="py-16 border-b border-border">
+        <div class="container animate-snap">
+            <h2 class="text-center text-4xl font-black uppercase mb-8">Open Source Contributions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border border-border bg-black p-8">
+                <div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2"><i class="fa-solid fa-star text-red mr-2"></i>Astropy</h3>
+                    <p class="font-mono text-xs text-neutral-400 uppercase tracking-widest mb-4">Documentation, OpenAstronomy</p>
+                    <p class="text-neutral-400 text-justify font-body">Authored comprehensive docstrings for the CIRS coordinate frame to enhance developer and user documentation.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2"><i class="fa-solid fa-code-branch text-red mr-2"></i>RADIS</h3>
+                    <p class="font-mono text-xs text-neutral-400 uppercase tracking-widest mb-4">CI/CD, API Maintenance</p>
+                    <p class="text-neutral-400 text-justify font-body">Restored Codecov support, strengthening CI pipelines. Optimized repository codebase by deprecating obsolete JSON parsing functions.</p>
                 </div>
             </div>
         </div>
@@ -134,9 +167,9 @@
         <div class="ticker-wrap border-y mt-8">
             <div class="ticker">
                 <!-- Repeated blocks to ensure smooth continuous scrolling -->
-                <div class="ticker-item"> C++ / C# <span class="ticker-item-separator">✦</span> Python <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> MySQL <span class="ticker-item-separator">✦</span> Next.js <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Tailwind <span class="ticker-item-separator">✦</span> Express <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Linux <span class="ticker-item-separator">✦</span> AWS </div>
-                <div class="ticker-item"> C++ / C# <span class="ticker-item-separator">✦</span> Python <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> MySQL <span class="ticker-item-separator">✦</span> Next.js <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Tailwind <span class="ticker-item-separator">✦</span> Express <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Linux <span class="ticker-item-separator">✦</span> AWS </div>
-                <div class="ticker-item"> C++ / C# <span class="ticker-item-separator">✦</span> Python <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> MySQL <span class="ticker-item-separator">✦</span> Next.js <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Tailwind <span class="ticker-item-separator">✦</span> Express <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Linux <span class="ticker-item-separator">✦</span> AWS </div>
+                <div class="ticker-item"> Python <span class="ticker-item-separator">✦</span> Julia <span class="ticker-item-separator">✦</span> C/C++ <span class="ticker-item-separator">✦</span> Go <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Node.js <span class="ticker-item-separator">✦</span> SQL <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> Supabase <span class="ticker-item-separator">✦</span> Scikit-Learn <span class="ticker-item-separator">✦</span> PyTorch <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Kubernetes <span class="ticker-item-separator">✦</span> Linux </div>
+                <div class="ticker-item"> Python <span class="ticker-item-separator">✦</span> Julia <span class="ticker-item-separator">✦</span> C/C++ <span class="ticker-item-separator">✦</span> Go <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Node.js <span class="ticker-item-separator">✦</span> SQL <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> Supabase <span class="ticker-item-separator">✦</span> Scikit-Learn <span class="ticker-item-separator">✦</span> PyTorch <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Kubernetes <span class="ticker-item-separator">✦</span> Linux </div>
+                <div class="ticker-item"> Python <span class="ticker-item-separator">✦</span> Julia <span class="ticker-item-separator">✦</span> C/C++ <span class="ticker-item-separator">✦</span> Go <span class="ticker-item-separator">✦</span> JavaScript <span class="ticker-item-separator">✦</span> TypeScript <span class="ticker-item-separator">✦</span> React <span class="ticker-item-separator">✦</span> Node.js <span class="ticker-item-separator">✦</span> SQL <span class="ticker-item-separator">✦</span> MongoDB <span class="ticker-item-separator">✦</span> Supabase <span class="ticker-item-separator">✦</span> Scikit-Learn <span class="ticker-item-separator">✦</span> PyTorch <span class="ticker-item-separator">✦</span> Docker <span class="ticker-item-separator">✦</span> Kubernetes <span class="ticker-item-separator">✦</span> Linux </div>
             </div>
         </div>
     </section>
@@ -146,101 +179,137 @@
         <div class="container animate-snap">
             <div class="flex justify-between items-end mb-8 border-b-4 border-black pb-4">
                 <h2 class="text-5xl font-black uppercase tracking-tighter m-0">Featured Work</h2>
-                <span class="font-mono text-xs uppercase tracking-widest text-neutral-600 hidden md:inline-block relative bottom-1">Curated Selections</span>
+                <span class="font-mono text-xs uppercase tracking-widest text-neutral-600 hidden md:inline-block relative bottom-1"><i class="fa-solid fa-meteor text-red mr-2"></i>Curated Selections</span>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-12 border border-black">
-                <!-- Bike Sharing ML -->
-                <div class="col-span-12 lg:col-span-6 p-8 lg:grid-border-r border-b border-black hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+            <div class="grid grid-cols-1 lg:grid-cols-12 border border-border">
+                <!-- Bionium X -->
+                <div class="col-span-12 lg:col-span-6 p-8 lg:grid-border-r border-b border-border hard-shadow-hover bg-neutral-100 flex flex-col justify-between cursor-pointer">
                     <div>
                         <div class="flex justify-between items-center mb-6 gap-2">
-                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Bike Analytics</h3>
-                            <a href="#" target="_blank" class="icon-box shrink-0" aria-label="View Bike Sharing Code">
-                                <i class="fa-brands fa-github text-xl"></i>
-                            </a>
+                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Bionium-X</h3>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/Omiii-215/BioniumX" target="_blank" class="icon-box shrink-0" aria-label="View Code"><i class="fa-brands fa-github text-xl"></i></a>
+                                <a href="https://omiii-215.github.io/BioniumX/" target="_blank" class="icon-box shrink-0" aria-label="View Live"><i class="fa-solid fa-external-link-alt text-xl"></i></a>
+                            </div>
                         </div>
-                        <p class="text-lg text-justify text-neutral-600 mb-6 font-body">
-                            Engineered machine learning pipelines utilizing Random Forest, Logistic Regression, and Isolation Forest models. Analyzes bike-sharing demand with thorough statistical distribution testing.
-                        </p>
+                        <ul class="text-neutral-400 text-justify mb-4 list-disc pl-5 font-body">
+                            <li class="mb-2">Engineered a modular scientific Python library for exoplanetary biosignature detection, establishing a scalable architecture for thermodynamic atmospheric modeling.</li>
+                            <li class="mb-2">Implemented robust data caching mechanisms to process large astronomical datasets efficiently, accelerating data retrieval by over 30%.</li>
+                            <li>Hardened repository infrastructure by integrating Sphinx for automated documentation and Dependabot for CI/CD security.</li>
+                        </ul>
                     </div>
                     
-                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                    <div class="border-t border-border pt-4 flex justify-between items-center mt-4">
                         <div class="flex flex-wrap gap-2">
-                            <span class="tech-tag text-black">Python</span>
-                            <span class="tech-tag text-black">Data Science</span>
+                            <span class="tech-tag text-white">Python</span>
+                            <span class="tech-tag text-white">Sphinx</span>
+                            <span class="tech-tag text-white">CI/CD</span>
                         </div>
                         <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.1</span>
                     </div>
                 </div>
 
-                <!-- Bionium X -->
-                <div class="col-span-12 lg:col-span-6 p-8 border-b border-black hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                <!-- Bike Sharing ML -->
+                <div class="col-span-12 lg:col-span-6 p-8 border-b border-border hard-shadow-hover bg-neutral-100 flex flex-col justify-between cursor-pointer">
                     <div>
                         <div class="flex justify-between items-center mb-6 gap-2">
-                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Bionium X</h3>
-                            <a href="https://bionium-x.streamlit.app/" target="_blank" class="icon-box shrink-0" aria-label="View Bionium X Live">
-                                <i class="fa-solid fa-external-link-alt text-xl"></i>
-                            </a>
+                            <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Bike Analytics</h3>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/Omiii-215/Bike-Sharing-Usage-Behavior" target="_blank" class="icon-box shrink-0" aria-label="View Code"><i class="fa-brands fa-github text-xl"></i></a>
+                                <a href="https://bike-sharing-usage-behavior.onrender.com/" target="_blank" class="icon-box shrink-0" aria-label="View Live"><i class="fa-solid fa-external-link-alt text-xl"></i></a>
+                            </div>
                         </div>
-                        <p class="text-lg text-justify text-neutral-600 mb-6 font-body">
-                            A highly resilient Streamlit environment deployed in production. Built with automated GitHub Actions keep-alive workflows to ensure zero-downtime availability for its data interfaces.
-                        </p>
+                        <ul class="text-neutral-400 text-justify mb-4 list-disc pl-5 font-body">
+                            <li class="mb-2">Analyzed an urban mobility dataset of over 10,000+ rental records to extract seasonal variability and usage patterns via advanced EDA techniques.</li>
+                            <li class="mb-2">Developed and trained a linear regression model using Scikit-Learn to predict hourly bike demand, optimizing fleet distribution efficiency.</li>
+                            <li>Engineered data preprocessing pipelines to successfully handle outliers and missing values, improving reliability by 15%.</li>
+                        </ul>
                     </div>
                     
-                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                    <div class="border-t border-border pt-4 flex justify-between items-center mt-4">
                         <div class="flex flex-wrap gap-2">
-                            <span class="tech-tag text-black">Streamlit</span>
-                            <span class="tech-tag text-black">DevOps</span>
+                            <span class="tech-tag text-white">Scikit-Learn</span>
+                            <span class="tech-tag text-white">Supabase</span>
+                            <span class="tech-tag text-white">Pandas</span>
                         </div>
                         <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.2</span>
                     </div>
                 </div>
 
                 <!-- CalCarbo -->
-                <div class="col-span-12 lg:col-span-6 p-8 lg:grid-border-r border-b lg:border-b-0 border-black hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                <div class="col-span-12 lg:col-span-6 p-8 lg:grid-border-r border-b lg:border-b-0 border-border hard-shadow-hover bg-neutral-100 flex flex-col justify-between cursor-pointer">
                     <div>
                         <div class="flex justify-between items-center mb-6 gap-2">
                             <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">CalCarbo</h3>
-                            <a href="https://github.com/Omiii-215/CalCarbo" target="_blank" class="icon-box shrink-0" aria-label="View CalCarbo Code">
-                                <i class="fa-brands fa-github text-xl"></i>
-                            </a>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/Omiii-215/CalCarbo" target="_blank" class="icon-box shrink-0" aria-label="View Code"><i class="fa-brands fa-github text-xl"></i></a>
+                                <a href="https://carbon-footprint02.netlify.app/login.html" target="_blank" class="icon-box shrink-0" aria-label="View Live"><i class="fa-solid fa-external-link-alt text-xl"></i></a>
+                            </div>
                         </div>
-                        <p class="text-lg text-justify text-neutral-600 mb-6 font-body">
-                            An eco-friendly Carbon footprint and emission tracker designed to help users monitor and reduce their environmental impact utilizing meticulous environmental analytics and reporting.
-                        </p>
+                        <ul class="text-neutral-400 text-justify mb-4 list-disc pl-5 font-body">
+                            <li class="mb-2">An eco-friendly Carbon footprint and emission tracker designed to help users monitor and reduce their environmental impact.</li>
+                            <li>Utilized meticulous environmental analytics and reporting tools to provide actionable insights for sustainable lifestyle choices.</li>
+                        </ul>
                     </div>
                     
-                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                    <div class="border-t border-border pt-4 flex justify-between items-center mt-4">
                         <div class="flex flex-wrap gap-2">
-                            <span class="tech-tag text-black">JavaScript</span>
-                            <span class="tech-tag text-black">Eco-Tech</span>
+                            <span class="tech-tag text-white">JavaScript</span>
+                            <span class="tech-tag text-white">Eco-Tech</span>
                         </div>
                         <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.3</span>
                     </div>
                 </div>
                 
                 <!-- Khel-Connect -->
-                <div class="col-span-12 lg:col-span-6 p-8 hard-shadow-hover bg-white flex flex-col justify-between cursor-pointer">
+                <div class="col-span-12 lg:col-span-6 p-8 hard-shadow-hover bg-neutral-100 flex flex-col justify-between cursor-pointer">
                     <div>
                         <div class="flex justify-between items-center mb-6 gap-2">
                             <h3 class="text-3xl lg:text-4xl font-serif font-black uppercase mb-0 tracking-tight leading-none">Khel-Connect</h3>
-                            <a href="https://github.com/Omiii-215/Khel-Connect" target="_blank" class="icon-box shrink-0" aria-label="View Khel-Connect Code">
-                                <i class="fa-brands fa-github text-xl"></i>
-                            </a>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/Omiii-215/Khel-Connect" target="_blank" class="icon-box shrink-0" aria-label="View Code"><i class="fa-brands fa-github text-xl"></i></a>
+                                <a href="https://www.figma.com/design/BblpmvIuEM7QKdSJvEv3Cj/AthleteConnect-Mobile-App" target="_blank" class="icon-box shrink-0" aria-label="View Live"><i class="fa-solid fa-external-link-alt text-xl"></i></a>
+                            </div>
                         </div>
-                        <p class="text-lg text-justify text-neutral-600 mb-8 font-body mt-4">
-                            A robust mobile application engineered for athletes to connect natively, analyze immediate performance metrics, and surface critical sporting opportunities in real time.
-                        </p>
+                        <ul class="text-neutral-400 text-justify mb-4 list-disc pl-5 font-body">
+                            <li class="mb-2">A robust mobile application engineered for athletes to connect natively and analyze immediate performance metrics.</li>
+                            <li>Surfaces critical sporting opportunities in real time using scalable backend architectures.</li>
+                        </ul>
                     </div>
                     
-                    <div class="border-t border-black pt-4 flex justify-between items-center mt-4">
+                    <div class="border-t border-border pt-4 flex justify-between items-center mt-4">
                         <div class="flex flex-wrap gap-2">
-                            <span class="tech-tag text-black">TypeScript</span>
-                            <span class="tech-tag text-black">Sports Tech</span>
+                            <span class="tech-tag text-white">TypeScript</span>
+                            <span class="tech-tag text-white">Sports Tech</span>
                         </div>
                         <span class="font-mono text-xs text-neutral-500 uppercase shrink-0 ml-2">Fig 2.4</span>
                     </div>
                 </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-16">
+        <div class="container animate-snap">
+            <h2 class="text-4xl font-black uppercase mb-8 pb-4"><i class="fa-solid fa-trophy text-red mr-3"></i>Achievements & Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 border border-border bg-neutral-100 hard-shadow-hover cursor-pointer transition-all duration-300">
+                    <h3 class="text-xl font-serif font-bold text-white mb-2">Astrophysics Certification</h3>
+                    <p class="font-mono text-xs text-red uppercase tracking-widest mb-4 border-b border-border pb-2">IIT Kharagpur (Mar 2026)</p>
+                    <p class="text-neutral-400 text-sm font-body text-justify">Completed a comprehensive research program focusing on observational astronomy, stellar/galactic astrophysics, cosmology, and exoplanet studies.</p>
+                </div>
+                <div class="p-8 border border-border bg-neutral-100 hard-shadow-hover cursor-pointer transition-all duration-300">
+                    <h3 class="text-xl font-serif font-bold text-white mb-2">NSDC Certified Trainings</h3>
+                    <p class="font-mono text-xs text-red uppercase tracking-widest mb-4 border-b border-border pb-2">Corizo Edutech (Jul 2025)</p>
+                    <p class="text-neutral-400 text-sm font-body text-justify">Earned professional certifications in Data Science (machine learning, data visualization, predictive modeling) and Web Development.</p>
+                </div>
+                <div class="p-8 border border-border bg-neutral-100 hard-shadow-hover cursor-pointer transition-all duration-300">
+                    <h3 class="text-xl font-serif font-bold text-white mb-2">Technical Assistance</h3>
+                    <p class="font-mono text-xs text-red uppercase tracking-widest mb-4 border-b border-border pb-2">Polaris Vibathon</p>
+                    <p class="text-neutral-400 text-sm font-body text-justify">Volunteered for Asia Books of World Records Award Winning Vibathon backed by Y Combinator, Replit, OpenAI, and PeakXV.</p>
+                </div>
+            </div>
         </div>
     </section>
 
